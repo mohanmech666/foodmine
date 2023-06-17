@@ -1,4 +1,5 @@
 
+
 export const sample_foods: any[] = [
   {
     id:'1',
@@ -78,20 +79,3 @@ export const sample_tags:any[] = [
   { name: 'Fry', count: 1 },
   { name: 'Soup', count: 1 },
 ]
-
-export const sample_users: any[] = [
-  {
-    name: "Mohan",
-    email: "mohanmech666@gmail.com",
-    password: "12345",
-    address: "kangeyam",
-    isAdmin: true,
-  },
-  {
-    name: "sundaram",
-    email: "sundaram555@gmail.com",
-    password: "12345",
-    address: "Tamilnadu",
-    isAdmin: false,
-  },
-];
