@@ -1,9 +1,11 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
-const VALIDATORS_MESSAGE:any ={
+const VALIDATORS_MESSAGES:any ={
   required: 'Should not be empty',
-  email: 'Email is not valid'
+  email: 'Email is not valid',
+  minlength: 'Field is too short',
+  notMatch: 'Password and Confirm does not match'
 }
 
 @Component({
@@ -11,7 +13,6 @@ const VALIDATORS_MESSAGE:any ={
   templateUrl: './input-validation.component.html',
   styleUrls: ['./input-validation.component.css']
 })
-
 export class InputValidationComponent implements OnInit, OnChanges {
 @Input()
 control!:AbstractControl;
@@ -19,6 +20,7 @@ control!:AbstractControl;
 showErrorsWhen:boolean = true;
 errorMessages: string[] = [];
   constructor() { }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.checkValidation();
   }
@@ -40,7 +42,8 @@ this.control.valueChanges.subscribe(() =>{
     }
 
     const errorkeys = Object.keys(errors);
-    this.errorMessages = errorkeys.map(key => VALIDATORS_MESSAGE[key]);
+    this.errorMessages = errorkeys.map(key => VALIDATORS_MESSAGES[key]);
+
   }
 
 }

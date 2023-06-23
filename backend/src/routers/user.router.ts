@@ -3,7 +3,8 @@ import { sample_users } from '../data';
 import jwt from 'jsonwebtoken';
 import asynHandler from 'express-async-handler';
 import { User, UserModel } from '../models/user.model';
-
+import { HTTP_BAD_REQUEST } from '../constants/http_status';
+import bcrypt from 'bcryptjs';
 const router = Router();
 
 router.get("/seed", asynHandler(
@@ -28,14 +29,38 @@ router.post("/login", asynHandler(
       res.send(generateTokenReponse(user));
      }
      else{
-       const BAD_REQUEST = 400;
-       res.status(BAD_REQUEST).send("Username or password is invalid!");
+              res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
      }
   
   }
   ))
   
-  const generateTokenReponse = (user :User) => {
+router.post('/register', asynHandler(
+async (req,res) => {
+  const {name, email, password, address} = req.body;
+  const user = await UserModel.findOne({email});
+  if(user){
+    res.status(HTTP_BAD_REQUEST)
+    .send ('User is already exist, please login!');
+    return;
+  }
+
+  const encryptedPassword = await bcrypt.hash(password, 10);
+
+  const newUser:User = {
+    id:'',
+    name,
+    email: email.toLowerCase(),
+    password: encryptedPassword,
+    address,
+    isAdmin: false
+  }
+
+  const dbUser = await UserModel.create(newUser);
+  res.send(generateTokenReponse(dbUser));
+}
+))
+    const generateTokenReponse = (user :User) => {
     const token = jwt.sign({
       email:user.email, isAdmin: user.isAdmin
     },"SomeRandomText",{
