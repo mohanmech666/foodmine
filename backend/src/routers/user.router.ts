@@ -63,7 +63,7 @@ async (req,res) => {
     const generateTokenReponse = (user :User) => {
     const token = jwt.sign({
       id: user.id, email:user.email, isAdmin: user.isAdmin
-    },"SomeRandomText",{
+    },process.env.JWT_SECRET!,{
       expiresIn:"30d"
     });
   

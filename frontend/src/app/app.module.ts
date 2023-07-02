@@ -27,6 +27,9 @@ import { CheckoutPageComponent } from './components/pages/checkout-page/checkout
 import { OrderItemsListComponent } from './components/partials/order-items-list/order-items-list.component';
 import { MapComponent } from './components/partials/map/map.component';
 import { AuthInterceptor } from './auth/guards/auth.interceptor';
+import { PaymentPageComponent } from './components/pages/payment-page/payment-page.component';
+import { PaypalButtonComponent } from './components/partials/paypal-button/paypal-button.component';
+import { OrderTrackPageComponent } from './components/pages/order-track-page/order-track-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +51,9 @@ import { AuthInterceptor } from './auth/guards/auth.interceptor';
     CheckoutPageComponent,
     OrderItemsListComponent,
     MapComponent,
+    PaymentPageComponent,
+    PaypalButtonComponent,
+    OrderTrackPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +71,7 @@ import { AuthInterceptor } from './auth/guards/auth.interceptor';
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true},
-    {provide:HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi:true}
+    {provide:HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi:true},
 
   ],
   bootstrap: [AppComponent]

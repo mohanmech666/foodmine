@@ -29,7 +29,7 @@ export const OrderItemSchema = new Schema<OrderItem>(
 );
 
 export interface Order{
-    id:string;
+    id:number;
     items: OrderItem[];
     totalPrice:number;
     name: string;
@@ -51,8 +51,6 @@ export interface Order{
       items: {type: [OrderItemSchema], required: true},
       status: {type: String, default: OrderStatus.NEW},
       user: {type: Schema.Types.ObjectId, required: true},
-      createdAt: {type: Date, required: true},
-      updatedAt: {type: Date, required: true}
   },{
       timestamps: true,
       toJSON:{
