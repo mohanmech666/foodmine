@@ -17,7 +17,7 @@ label!:string;
 type: 'text' | 'password' | 'email' = 'text';
 
 get formControl(){
-  return this.control as FormControl
+  return this.control as FormControl;
 }
   constructor() { }
 
